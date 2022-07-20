@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>validate Form</title>
+    <style>
+        body{
+            padding: 50px 10px;
+        }
+        .myform{
+            font-size: 20px;
+        }
+        .formerror{
+            color: red;
+        }
+        .but{
+            border-radius: 9px;
+            width: 100px;
+            height: 30px;
+            font-size: 20px;
+            margin: 20px 22px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <fieldset style="width:400px ;">
+        <h1>Sign up</h1>
+        <form action="/form.html" method="post" name="myForm" onsubmit="return validateForm()">
+
+            <div class="formdesign" id="name">Name <input type="text" name="fname" required>
+            <span class="formerror"></span><br><br>
+            </div>
+    
+            <div class="formdesign" id="email">Email <input type="email" name="femail" required>
+                <span class="formerror"></span><br><br>
+            </div>
+    
+            <div class="formdesign" id="password">Password <input type="password" name="fpassword" required>
+                <span class="formerror"></span><br><br>
+            </div>
+    
+            <div class="formdesign" id="phone">phone no: <input type="phone" name="fphone" required>
+                <span class="formerror"></span><br><br>
+            </div>
+    
+           <div><input type="checkbox" name="consent" unchecked>I declare that information given by  me is correct </div><br><br>
+           
+           <input class="but" type="submit" value="Sign up">
+    
+  
+        </form>
+    </fieldset>
+   
+    <script>
+        function clearErrors(){
+            errors = document.getElementsByClassName('formerror');
+            for(let item of errors){
+                item.innerHTML = "";
+            }
+        }
+        function seterror(id,error){
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+           
+
+            
+
+        }
+
+        function validateForm(){
+            var returnval = true;
+            clearErrors();
+
+
+            var name = document.forms['myForm']["fname"].value;
+            if(name.length<2){
+                seterror("name", "*Length of name is too short");
+                returnval = false;
+            }
+            
+            var email = document.forms['myForm']["femail"].value;
+            if(email.length >15){
+                seterror("email", "*email is too long");
+                returnval = false;
+
+            }
+
+            var password = document.forms['myForm']["fpassword"].value;
+            if(password.length < 6){
+                seterror("password", "*password should be atleast 6 character");
+                returnval = false;
+
+            }
+
+            var phone = document.forms['myForm']["fphone"].value;
+            if(phone.length != 10){
+                seterror("phone", "*phone number should be of 10 digits");
+                returnval = false;
+            }
+
+
+            returnval;
+            
+        }
+    </script>
+
+    
+    
+</body>
+</html>
